@@ -19,10 +19,11 @@
 
 
 注册服务
-    编辑 config/app.php 文件, 在 providers 数组中添加: Firstphp\Wechat\Providers\WechatServiceProvider::class,
+    编辑 config/app.php 文件, 在 providers 数组中添加如下:
+    Firstphp\Wechat\Providers\WechatServiceProvider::class,
 
 
-示例代码：
+示例代码
 
 	use Firstphp\Icelog\Facades\IcelogFactory;
 
