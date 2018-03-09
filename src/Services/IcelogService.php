@@ -79,25 +79,30 @@ class IcelogService {
      * @author 狂奔的螞蟻 <www.firstphp.com>
      */
     public function getlogs($offset = 0, $limit = 1) {
+        $total = DB::table("user_log")->count();
         $res = DB::table("user_log")
             ->take($limit)
             ->skip($offset)
             ->orderBy('id', 'DESC')
             ->get();
         $res = $res ? $res->toArray() : '';
-        $data = [];
+        $result = [];
         if ($res) {
             foreach ($res as $key => $val) {
-                $data[$key]['id'] = $val->id;
-                $data[$key]['user_id'] = $val->user_id;
-                $data[$key]['source_id'] = $val->source_id;
-                $data[$key]['remark'] = $val->remark;
-                $data[$key]['original'] = $val->original;
-                $data[$key]['record'] = $val->record;
-                $data[$key]['created_at'] = $val->created_at;
-                $data[$key]['updated_at'] = $val->updated_at;
-             }
+                $result[$key]['id'] = $val->id;
+                $result[$key]['user_id'] = $val->user_id;
+                $result[$key]['source_id'] = $val->source_id;
+                $result[$key]['remark'] = $val->remark;
+                $result[$key]['original'] = $val->original;
+                $result[$key]['record'] = $val->record;
+                $result[$key]['created_at'] = $val->created_at;
+                $result[$key]['updated_at'] = $val->updated_at;
+            }
         }
+        $data = [
+            'total' => $total,
+            'data' => $result
+        ];
 
         return $data;
 
